@@ -1,3 +1,10 @@
+using GLib;
+
+public errordomain SongError {
+    EMPTY_FIELD,
+    INVALID_DATA
+}
+
 public class Song : Object {
 
     private string  _title;
@@ -8,53 +15,77 @@ public class Song : Object {
     private int?    _year;
     private int?    _track;
 
+
+    //Constructor
     public Song(string title, string performer, string path, string? album = null,
-                string? genre = null, int? year = null, int? track = null) {
-        
-        this.title = title;
-        this.performer = performer;
-        this.path = path;
-        this.album = album;
-        this.genre = genre;
-        this.year = year;
-        this.track = track;
+                string? genre = null, int? year = null, int? track = null) throws SongError {
+        this.set_title(title);
+        this.set_performer(performer);
+        this.set_path(path);
+        this.set_album(album);
+        this.set_genre(genre);
+        this.set_year(year);
+        this.set_track(track);
     }
 
-    public string title {
-        get { return _title; }
-        set { _title = value; }
-    }
-
-    public string performer {
-            get { return _performer; }
-            set { _performer = value; }
-    }
-
-    public string path {
-        get { return _path; }
-        set { _path = value; }
-    }
-
-    public string? album {
-        get { return _album; }
-        set { _album = value; }
-    }
-
-    public string? genre {
-        get { return _genre; }
-        set { _genre = value; }
-    }
-
-    public int? year {
-        get { return _year; }
-        set { _year = value; }
-    }
-
-    public int? track {
-        get { return _track; }
-        set { _track = value; }
+    //GETTERS
+    public string get_title() {
+        return this._title;
     }
     
+    public string get_performer() {
+        return this._performer;
+    }
+    
+    public string get_path() {
+        return this._path;
+    }
+    
+    public string? get_album() {
+        return this._album;
+    }
+    
+    public string? get_genre() {
+        return this._genre;
+    }
+    
+    public int? get_year() {
+        return this._year;
+    }
+    
+    public int? get_track() {
+        return this._track;
+    }
 
-   
+
+    // SETTERS
+    public void set_title(string value) throws SongError {
+        this._title = value;
+    }
+    
+    public void set_performer(string value) throws SongError {
+        this._performer = value;
+    }
+    
+    public void set_path(string value) throws SongError {
+        this._path = value;
+    }
+    
+    public void set_album(string? value) throws SongError {
+        this._album = value;
+    }
+    
+    public void set_genre(string? value) throws SongError {
+        this._genre = value;
+    }
+    
+    public void set_year(int? value) throws SongError {
+        this._year = value;
+    }
+    
+    public void set_track(int? value) throws SongError {
+        this._track = value;
+    }
 }
+
+
