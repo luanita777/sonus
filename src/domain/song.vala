@@ -7,6 +7,7 @@ public errordomain SongError {
 
 public class Song : Object {
 
+    private int     _id;
     private string  _title;
     private string  _performer;
     private string  _path;
@@ -17,8 +18,9 @@ public class Song : Object {
 
 
     //Constructor
-    public Song(string title, string performer, string path, string? album = null,
+    public Song(string id, string title, string performer, string path, string? album = null,
                 string? genre = null, int? year = null, int? track = null) throws SongError {
+        this.set_id(id);
         this.set_title(title);
         this.set_performer(performer);
         this.set_path(path);
@@ -29,6 +31,10 @@ public class Song : Object {
     }
 
     //GETTERS
+    public string get_id(){
+        return this._id;
+    }
+    
     public string get_title() {
         return this._title;
     }
@@ -59,6 +65,12 @@ public class Song : Object {
 
 
     // SETTERS
+    public void set_id(int value) throws SongError{
+        if(value == null || value < 0)
+            throw new SongError.INVALID_DATA("invalid id-song");
+        this._id = value;
+    }
+    
     public void set_title(string value) throws SongError {
         if (value.strip().length == 0)
             throw new SongError.EMPTY_FIELD("title is empty");
