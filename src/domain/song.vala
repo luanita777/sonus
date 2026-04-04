@@ -66,7 +66,7 @@ public class Song : Object {
 
     // SETTERS
     public void set_id(int value) throws SongError{
-        if(value == null || value < 0)
+        if(value < 0)
             throw new SongError.INVALID_DATA("invalid id-song");
         this._id = value;
     }
