@@ -60,32 +60,47 @@ public class Song : Object {
 
     // SETTERS
     public void set_title(string value) throws SongError {
+        if (value.strip().length == 0)
+            throw new SongError.EMPTY_FIELD("title is empty");
         this._title = value;
     }
     
     public void set_performer(string value) throws SongError {
+        if (value.strip().length == 0)
+            throw new SongError.EMPTY_FIELD("performer is empty");
         this._performer = value;
     }
-    
+
     public void set_path(string value) throws SongError {
+        if (value.strip().length == 0)
+            throw new SongError.EMPTY_FIELD("path is empty");
         this._path = value;
     }
-    
+
     public void set_album(string? value) throws SongError {
+        if (value != null && value.strip().length == 0)
+            throw new SongError.EMPTY_FIELD("album is empty");
         this._album = value;
     }
-    
+
     public void set_genre(string? value) throws SongError {
+        if (value != null && value.strip().length == 0)
+            throw new SongError.EMPTY_FIELD("genre is empty");
         this._genre = value;
     }
-    
+
     public void set_year(int? value) throws SongError {
+        if (value != null && value < 0)
+            throw new SongError.INVALID_DATA("invalid year");
         this._year = value;
     }
-    
+
     public void set_track(int? value) throws SongError {
+        if (value != null && value <= 0)
+            throw new SongError.INVALID_DATA("invalid track");
         this._track = value;
     }
+
 }
 
 
