@@ -31,7 +31,7 @@ public class Song : Object {
     }
 
     //GETTERS
-    public string get_id(){
+    public int get_id(){
         return this._id;
     }
     
