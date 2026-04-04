@@ -7,6 +7,14 @@ int main(string[] args) {
 
     tests = new TestSong();
 
+    Test.add_func("/song/id", () => {
+            try {
+                tests.test_id();
+            } catch (Error e) {
+                error("Error en ID: %s", e.message);
+            }
+        });
+    
     Test.add_func("/song/constructor", () => {
         try {
             tests.test_constructor();
