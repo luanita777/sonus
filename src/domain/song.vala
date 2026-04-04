@@ -18,7 +18,7 @@ public class Song : Object {
 
 
     //Constructor
-    public Song(string id, string title, string performer, string path, string? album = null,
+    public Song(int id, string title, string performer, string path, string? album = null,
                 string? genre = null, int? year = null, int? track = null) throws SongError {
         this.set_id(id);
         this.set_title(title);
