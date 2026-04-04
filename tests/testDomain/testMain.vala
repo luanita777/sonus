@@ -1,93 +1,71 @@
 using GLib;
 
-static TestSong tests;
+
+static TestSong song_tests;
+static TestPerformerType performer_type_tests;
 
 int main(string[] args) {
-    Test.init(ref args);
-
-    tests = new TestSong();
-
-    Test.add_func("/song/id", () => {
-            try {
-                tests.test_id();
-            } catch (Error e) {
-                error("Error en ID: %s", e.message);
-            }
-        });
     
+    Test.init(ref args);
+    song_tests = new TestSong();
+    performer_type_tests = new TestPerformerType();
+
+    add_tests_song();
+    add_tests_performer_type();
+
+    return Test.run();
+}
+
+//register of song tests
+void add_tests_song() {
+    
+    //delegates
+    Test.add_func("/song/id", () => {
+        try { song_tests.test_id(); } catch (Error e) { error(e.message); }
+    });
+
     Test.add_func("/song/constructor", () => {
-        try {
-            tests.test_constructor();
-        } catch (Error e) {
-            error("Error en constructor: %s\n", e.message);
-        }
+        try { song_tests.test_constructor(); } catch (Error e) { error(e.message); }
     });
 
     Test.add_func("/song/title", () => {
-        try {
-            tests.test_title();
-        } catch (Error e) {
-            error("Error en title: %s\n", e.message);
-        }
+        try { song_tests.test_title(); } catch (Error e) { error(e.message); }
     });
 
     Test.add_func("/song/performer", () => {
-        try {
-            tests.test_performer();
-        } catch (Error e) {
-            error("Error en performer: %s\n", e.message);
-        }
+        try { song_tests.test_performer(); } catch (Error e) { error(e.message); }
     });
 
     Test.add_func("/song/path", () => {
-        try {
-            tests.test_path();
-        } catch (Error e) {
-            error("Error en path: %s\n", e.message);
-        }
+        try { song_tests.test_path(); } catch (Error e) { error(e.message); }
     });
 
     Test.add_func("/song/album", () => {
-        try {
-            tests.test_album();
-        } catch (Error e) {
-            error("Error en album: %s\n", e.message);
-        }
+        try { song_tests.test_album(); } catch (Error e) { error(e.message); }
     });
 
     Test.add_func("/song/genre", () => {
-        try {
-            tests.test_genre();
-        } catch (Error e) {
-            error("Error en genre: %s\n", e.message);
-        }
+        try { song_tests.test_genre(); } catch (Error e) { error(e.message); }
     });
 
     Test.add_func("/song/year", () => {
-        try {
-            tests.test_year();
-        } catch (Error e) {
-            error("Error en year: %s\n", e.message);
-        }
+        try { song_tests.test_year(); } catch (Error e) { error(e.message); }
     });
 
     Test.add_func("/song/track", () => {
-        try {
-            tests.test_track();
-        } catch (Error e) {
-            error("Error en track: %s\n", e.message);
-        }
+        try { song_tests.test_track(); } catch (Error e) { error(e.message); }
     });
 
     Test.add_func("/song/full", () => {
-        try {
-            tests.test_song();
-        } catch (Error e) {
-            error("Error en full test: %s\n", e.message);
-        }
+        try { song_tests.test_song(); } catch (Error e) { error(e.message); }
     });
+}
 
-    return Test.run();
+//register of type-performer tests
+void add_tests_performer_type() {
+    Test.add_func("/performer_type/map", () => {
+        performer_type_tests.test_map_int();
+    });
 }
 
 
