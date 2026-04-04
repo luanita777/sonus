@@ -30,15 +30,15 @@ public class Performer : Object {
 
 
     //Setters
-    public void set_id(int value){
+    public void set_id(int value) throws Sonus.DomainError {
         this._id = value;
     }
 
-    public void set_type(PerformerType value){
+    public void set_type(PerformerType value)  throws Sonus.DomainError{
         this._type = value;
     }
 
-    public void set_name(string value){
+    public void set_name(string value) throws Sonus.DomainError{
         this._name = value;
     }
 }
