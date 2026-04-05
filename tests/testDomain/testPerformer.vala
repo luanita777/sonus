@@ -30,7 +30,7 @@ public class TestPerformer : Object {
             var performer = new Performer(id, type, name);
             assert(performer.get_id() == id);
             assert(performer.get_name() == name);
-            assert(performer.get_type() == type);
+            assert(performer.get_performer_type() == type);
         } catch (Error e) {
             assert_not_reached();
         }
@@ -100,12 +100,12 @@ public class TestPerformer : Object {
     //test for type
     public void test_type() throws DomainError {
         var performer = new Performer(1, PerformerType.PERSON, "person");
-        assert(performer.get_type() == PerformerType.PERSON);
+        assert(performer.get_performer_type() == PerformerType.PERSON);
 
         performer.set_type(PerformerType.GROUP);
-        assert(performer.get_type() == PerformerType.GROUP);
+        assert(performer.get_performer_type() == PerformerType.GROUP);
 
         performer.set_type(PerformerType.UNKNOWN);
-        assert(performer.get_type() == PerformerType.UNKNOWN);
+        assert(performer.get_performer_type() == PerformerType.UNKNOWN);
     }
 }
