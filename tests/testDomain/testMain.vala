@@ -10,6 +10,7 @@ int main(string[] args) {
     Test.init(ref args);
     song_tests = new TestSong();
     performer_type_tests = new TestPerformerType();
+    performer_tests = new TestPerformer();
 
     add_tests_song();
     add_tests_performer_type();
