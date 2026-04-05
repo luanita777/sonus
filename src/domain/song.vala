@@ -94,13 +94,19 @@ namespace Sonus {
         public void set_album(string? value) throws DomainError {
             if (value != null && value.strip().length == 0)
                 throw new DomainError.EMPTY_FIELD("album can not be empty");
-            this._album = value.strip();
+            if(value != null)
+                this._album = value.strip();
+            else
+                this._album = null;
         }
         
         public void set_genre(string? value) throws DomainError {
             if (value != null && value.strip().length == 0)
                 throw new DomainError.EMPTY_FIELD("genre can not be empty");
-            this._genre = value.strip();
+            if(value != null)
+                this._genre = value.strip();
+            else
+                this._genre = null;
         }
         
         public void set_year(int? value) throws DomainError {
