@@ -1,4 +1,5 @@
 using GLib;
+using Sonus;
 
 public class TestSong : Object {
 
@@ -41,43 +42,43 @@ public class TestSong : Object {
 
     // --- TESTS ---
 
-    public void test_constructor() throws SongError {
+    public void test_constructor() throws DomainError {
 
         int r = random_id();
         
         try {
-            new Song(0,"", "p", "/p");
+            new Song(0,"t", "p", "/p");
             assert_not_reached();
         } catch (Error e) {
-            assert(e is SongError.INVALID_DATA);
+            assert(e is DomainError.INVALID_DATA);
         }
                 
         try {
-            new Song(-1,"", "p", "/p");
+            new Song(-1,"t", "p", "/p");
             assert_not_reached();
         } catch (Error e) {
-            assert(e is SongError.INVALID_DATA);
+            assert(e is DomainError.INVALID_DATA);
         }
         
         try {
             new Song(r,"", "p", "/p");
             assert_not_reached();
         } catch (Error e) {
-            assert(e is SongError.EMPTY_FIELD);
+            assert(e is DomainError.EMPTY_FIELD);
         }
 
         try {
             new Song(r, "t", "", "/p");
             assert_not_reached();
         } catch (Error e) {
-            assert(e is SongError.EMPTY_FIELD);
+            assert(e is DomainError.EMPTY_FIELD);
         }
 
         try {
             new Song(r, "t", "p", "");
             assert_not_reached();
         } catch (Error e) {
-            assert(e is SongError.EMPTY_FIELD);
+            assert(e is DomainError.EMPTY_FIELD);
         }
 
         int id = random_id();
@@ -101,7 +102,7 @@ public class TestSong : Object {
         assert(song.get_track() == track);
     }
 
-    public void test_id() throws SongError {
+    public void test_id() throws DomainError {
         var song = new Song(1, "t", "p", "/p");
 
         try {
@@ -114,15 +115,15 @@ public class TestSong : Object {
         try {
             song.set_id(0);
             assert_not_reached();
-        } catch (SongError e) {
-            assert(e is SongError.INVALID_DATA);
+        } catch (DomainError e) {
+            assert(e is DomainError.INVALID_DATA);
         }
 
         try {
             song.set_id(-1);
             assert_not_reached();
-        } catch (SongError e) {
-            assert(e is SongError.INVALID_DATA);
+        } catch (DomainError e) {
+            assert(e is DomainError.INVALID_DATA);
         }
 
         int new_id = random_id();
@@ -131,116 +132,141 @@ public class TestSong : Object {
         assert(song.get_id() == new_id); 
     }
 
-    public void test_title() throws SongError {
+    public void test_title() throws DomainError {
         var song = new Song(1, "t", "p", "/p");
 
         try {
             song.set_title(""); 
             assert_not_reached();
         } catch (Error e) {
-            assert(e is SongError.EMPTY_FIELD);
+            assert(e is DomainError.EMPTY_FIELD);
         }
         
         try {
             song.set_title("   ");
             assert_not_reached();
         } catch (Error e) {
-            assert(e is SongError.EMPTY_FIELD);
+            assert(e is DomainError.EMPTY_FIELD);
         }
 
         string new_title = random_title();
+        song.set_title("   title   ");
+        assert(song.get_title() == "title");
         assert(song.get_title() != new_title);
         song.set_title(new_title);
         assert(song.get_title() == new_title);
     }
 
-    public void test_performer() throws SongError {
+    public void test_performer() throws DomainError {
         var song = new Song(1, "t", "p", "/p");
 
         try {
             song.set_performer("");
             assert_not_reached();
         } catch (Error e) {
-            assert(e is SongError.EMPTY_FIELD);
+            assert(e is DomainError.EMPTY_FIELD);
         }
         
         try {
             song.set_performer("   ");
             assert_not_reached();
         } catch (Error e) {
-            assert(e is SongError.EMPTY_FIELD);
+            assert(e is DomainError.EMPTY_FIELD);
         }
 
         string new_performer = random_performer();
+        song.set_performer("   performer   ");
+        assert(song.get_performer("performer"));
         assert(song.get_performer() != new_performer);
         song.set_performer(new_performer);
         assert(song.get_performer() == new_performer);
     }
 
-    public void test_path() throws SongError {
+    public void test_path() throws DomainError {
         var song = new Song(1, "t", "p", "/p");
+        
         try {
             song.set_path("");
             assert_not_reached();
         } catch (Error e) {
-            assert(e is SongError.EMPTY_FIELD);
+            assert(e is DomainError.EMPTY_FIELD);
         }
         
         try {
             song.set_path("   ");
             assert_not_reached(); 
         } catch (Error e) {
-            assert(e is SongError.EMPTY_FIELD);
+            assert(e is DomainError.EMPTY_FIELD);
         }
 
+        string[] invalid_paths = {"/music/song.txt", "/musIc/photo.JPG", "/music/Archive.zip",
+            "/music/no_extension", "/music/fake.mp3.exe",  "/music/mp3_is_here.wav"};
+        
+        foreach (string path in invalid_paths) {
+            try {
+                song.set_path(path);
+            assert_not_reached(); 
+            } catch (DomainError e) {
+                assert(e is DomainError.INVALID_DATA);
+            }
+        }
+        
         string new_path = random_path();
+        song.set_path("     ~/path/music.mp3   ");
+        assert(song.get_path() == "~/path/music.mp3");
         assert(song.get_path() != new_path);
         song.set_path(new_path);
         assert(song.get_path() == new_path);
     }
 
-    public void test_album() throws SongError {
+    public void test_album() throws DomainError {
         var song = new Song(1, "t", "p", "/p");
 
         try {
             song.set_album(""); 
             assert_not_reached();
         } catch (Error e) {
-            assert(e is SongError.EMPTY_FIELD);
+            assert(e is DomainError.EMPTY_FIELD);
         }
 
         string album = random_album();
+        song.set_album("     album    ");
+        assert(song.get_album() == "album");
+        assert(song.get_album() != album);
         song.set_album(album);
         assert(song.get_album() == album);
         song.set_album(null);
         assert(song.get_album() == null); 
     }
 
-    public void test_genre() throws SongError {
+    public void test_genre() throws DomainError {
         var song = new Song(1, "t", "p", "/p");
 
         try {
             song.set_genre("");
             assert_not_reached();
         } catch (Error e) {
-            assert(e is SongError.EMPTY_FIELD);
+            assert(e is DomainError.EMPTY_FIELD);
         }
 
         string genre = random_genre();
+        song.set_genre("     genre    ");
+        assert(song.get_genre() == "genre");
+        assert(song.get_genre() != genre);
         song.set_genre(genre);
         assert(song.get_genre() == genre);
         song.set_genre(null);
         assert(song.get_genre() == null);
     }
 
-    public void test_year() throws SongError {
+    public void test_year() throws DomainError {
         var song = new Song(1, "t", "p", "/p");
 
         try {
             song.set_year(-10);
             assert_not_reached();
         } catch (Error e) {
-            assert(e is SongError.INVALID_DATA);
+            assert(e is DomainError.INVALID_DATA);
         }
 
         int year = random_year();
@@ -250,14 +276,14 @@ public class TestSong : Object {
         assert(song.get_year() == null); 
     }
 
-    public void test_track() throws SongError {
+    public void test_track() throws DomainError {
         var song = new Song(1, "t", "p", "/p");
 
         try {
             song.set_track(-1);
             assert_not_reached();
         } catch (Error e) {
-            assert(e is SongError.INVALID_DATA);
+            assert(e is DomainError.INVALID_DATA);
         }
 
         int track = random_track();
@@ -267,7 +293,7 @@ public class TestSong : Object {
         assert(song.get_track() == null);
     }
 
-    public void test_song() throws SongError {
+    public void test_song() throws DomainError {
         var song = new Song(1,"t", "p", "/p", "a", "g", 1, 1);
 
         int id = random_id();
