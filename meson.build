@@ -9,7 +9,9 @@ dependencies = [
 
 # Source files
 sources = files(
+    'src/domain/errors.vala',	
     'src/domain/performerType.vala',
+    'src/domain/performer.vala',
     'src/domain/song.vala'
 )
 
@@ -17,6 +19,7 @@ sources = files(
 test_sources = files(
     'tests/testDomain/testSong.vala',
     'tests/testDomain/testPerformerType.vala',
+    'tests/testDomain/testPerformer.vala',
     'tests/testDomain/testMain.vala'
 )
 
