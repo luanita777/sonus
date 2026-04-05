@@ -176,7 +176,7 @@ public class TestSong : Object {
 
         string new_performer = random_performer();
         song.set_performer("   performer   ");
-        assert(song.get_performer("performer"));
+        assert(song.get_performer() == "performer");
         assert(song.get_performer() != new_performer);
         song.set_performer(new_performer);
         assert(song.get_performer() == new_performer);
