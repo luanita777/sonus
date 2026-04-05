@@ -3,6 +3,7 @@ using GLib;
 
 static TestSong song_tests;
 static TestPerformerType performer_type_tests;
+static TestPerformer performer_tests;
 
 int main(string[] args) {
     
@@ -12,6 +13,7 @@ int main(string[] args) {
 
     add_tests_song();
     add_tests_performer_type();
+    add_tests_performer();
 
     return Test.run();
 }
@@ -66,6 +68,25 @@ void add_tests_performer_type() {
     Test.add_func("/performer_type/map", () => {
         performer_type_tests.test_map_int();
     });
+}
+
+void add_tests_performer(){
+
+    Test.add_func("/performer/constructor", () => {
+            try { performer_tests.test_constructor(); } catch (Error e) { error(e.message); }
+        });
+    
+    Test.add_func("/performer/id", () => {
+            try { performer_tests.test_id(); } catch (Error e) { error(e.message); }
+        });
+    
+    Test.add_func("/performer/name", () => {
+            try { performer_tests.test_name(); } catch (Error e) { error(e.message); }
+        });
+    
+    Test.add_func("/performer/type", () => {
+            try { performer_tests.test_type(); } catch (Error e) { error(e.message); }
+        });
 }
 
 
