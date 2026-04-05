@@ -47,28 +47,28 @@ public class TestSong : Object {
         int r = random_id();
         
         try {
-            new Song(0,"t", "p", "/p");
+            new Song(0,"t", "p", "/p.mp3");
             assert_not_reached();
         } catch (Error e) {
             assert(e is DomainError.INVALID_DATA);
         }
                 
         try {
-            new Song(-1,"t", "p", "/p");
+            new Song(-1,"t", "p", "/p.mp3");
             assert_not_reached();
         } catch (Error e) {
             assert(e is DomainError.INVALID_DATA);
         }
         
         try {
-            new Song(r,"", "p", "/p");
+            new Song(r,"", "p", "/p.mp3");
             assert_not_reached();
         } catch (Error e) {
             assert(e is DomainError.EMPTY_FIELD);
         }
 
         try {
-            new Song(r, "t", "", "/p");
+            new Song(r, "t", "", "/p.mp3");
             assert_not_reached();
         } catch (Error e) {
             assert(e is DomainError.EMPTY_FIELD);
@@ -103,7 +103,7 @@ public class TestSong : Object {
     }
 
     public void test_id() throws DomainError {
-        var song = new Song(1, "t", "p", "/p");
+        var song = new Song(1, "t", "p", "/p.mp3");
 
         try {
             song.set_id(10);
@@ -133,7 +133,7 @@ public class TestSong : Object {
     }
 
     public void test_title() throws DomainError {
-        var song = new Song(1, "t", "p", "/p");
+        var song = new Song(1, "t", "p", "/p.mp3");
 
         try {
             song.set_title(""); 
@@ -158,7 +158,7 @@ public class TestSong : Object {
     }
 
     public void test_performer() throws DomainError {
-        var song = new Song(1, "t", "p", "/p");
+        var song = new Song(1, "t", "p", "/p.mp3");
 
         try {
             song.set_performer("");
@@ -183,7 +183,7 @@ public class TestSong : Object {
     }
 
     public void test_path() throws DomainError {
-        var song = new Song(1, "t", "p", "/p");
+        var song = new Song(1, "t", "p", "/p.mp3");
         
         try {
             song.set_path("");
@@ -220,7 +220,7 @@ public class TestSong : Object {
     }
 
     public void test_album() throws DomainError {
-        var song = new Song(1, "t", "p", "/p");
+        var song = new Song(1, "t", "p", "/p.mp3");
 
         try {
             song.set_album(""); 
@@ -240,7 +240,7 @@ public class TestSong : Object {
     }
 
     public void test_genre() throws DomainError {
-        var song = new Song(1, "t", "p", "/p");
+        var song = new Song(1, "t", "p", "/p.mp3");
 
         try {
             song.set_genre("");
@@ -260,7 +260,7 @@ public class TestSong : Object {
     }
 
     public void test_year() throws DomainError {
-        var song = new Song(1, "t", "p", "/p");
+        var song = new Song(1, "t", "p", "/p.mp3");
 
         try {
             song.set_year(-10);
@@ -277,7 +277,7 @@ public class TestSong : Object {
     }
 
     public void test_track() throws DomainError {
-        var song = new Song(1, "t", "p", "/p");
+        var song = new Song(1, "t", "p", "/p.mp3");
 
         try {
             song.set_track(-1);
@@ -294,7 +294,7 @@ public class TestSong : Object {
     }
 
     public void test_song() throws DomainError {
-        var song = new Song(1,"t", "p", "/p", "a", "g", 1, 1);
+        var song = new Song(1,"t", "p", "/p.mp3", "a", "g", 1, 1);
 
         int id = random_id();
         string title = random_title();
