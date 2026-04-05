@@ -10,7 +10,7 @@ namespace Sonus {
         private string _name;
         
         //cosntructor
-        public Performer(int id, PerformerType type, string name){
+        public Performer(int id, PerformerType type, string name) throws DomainError{
             this.set_id(id);
             this.set_type(type);
             this.set_name(name);
@@ -32,16 +32,23 @@ namespace Sonus {
         
         
         //Setters
-        public void set_id(int value) throws Sonus.DomainError {
+        public void set_id(int value) throws DomainError {
+            if(value <= 0)
+                throw new DomainError.INVALID_DATA("invalid id-performer");
             this._id = value;
+            
         }
         
-        public void set_type(PerformerType value)  throws Sonus.DomainError{
+        public void set_type(PerformerType value)  throws DomainError{
             this._type = value;
         }
 
-        public void set_name(string value) throws Sonus.DomainError{
-            this._name = value;
+        public void set_name(string value) throws DomainError{
+            string cleanedName = value.strip();
+            if(cleanedName == ""){
+                throw new DomainError.EMPTY_FIELD("Performer name can´t be empty.");
+            }
+            this._name = cleanedName;
         }
     }
 }
