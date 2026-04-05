@@ -1,4 +1,5 @@
 using GLib;
+using Sonus;
 
 public class TestPerformerType : Object {
 
