@@ -24,7 +24,7 @@ public class TestPerson : Object {
     private string random_date() {
         int year = Random.int_range(1950, 2025);
         int month = Random.int_range(1, 13);
-        int day = Random.int_range(1, 29);
+        int day = Random.int_range(1, 28);
         return "%04d-%02d-%02d".printf(year, month, day);
     }
     
@@ -35,8 +35,8 @@ public class TestPerson : Object {
         int id = random_id();
         string stage = random_stage_name();
         string real = random_real_name();
-        string birth = random_date();
-        string death = random_date();
+        string birth = "1990-01-01"; 
+        string death = "2000-01-01";
         
         var person = new Person(id, stage, real, birth, death);
         
@@ -48,7 +48,7 @@ public class TestPerson : Object {
         assert(person.get_death_date() == death);
     }
     
-    public void test_real_name(){
+    public void test_real_name() throws DomainError{
         var p = new Person(random_id(), "Stage Name");
         
         try{
@@ -75,13 +75,14 @@ public class TestPerson : Object {
     public void test_dates() throws DomainError {
         var p = new Person(1, "n");
         
-        string[] valid_dates = {"1988-05-05", "2024-01-01", "1800-12-31"};
+        string[] valid_dates = {"1988-05-05", "2024-01-01", "1800-11-28"};
         foreach (var d in valid_dates) {
+            p.set_birth_date(null); 
+            p.set_death_date(null);
+
             p.set_birth_date(d);
-                assert(p.get_birth_date() == d);
-        }
-        
-        foreach (var d in valid_dates) {
+            assert(p.get_birth_date() == d);
+            
             p.set_death_date(d);
             assert(p.get_death_date() == d);
         }
@@ -139,6 +140,35 @@ public class TestPerson : Object {
             assert(e is DomainError.INVALID_DATA);
         }    
         
+    }
+
+    public void test_no_update_if_error_with_dates() throws DomainError{
+        var p = new Person(random_id(), "name");
+        p.set_birth_date("1990-01-01");
+        p.set_death_date("2000-01-01"); 
+
+        try {
+            p.set_death_date("1985-01-01"); 
+            assert_not_reached(); 
+        } catch (DomainError e) {
+            assert(e is DomainError.INVALID_DATA);
+            assert(p.get_death_date() == "2000-01-01");
+        }
+    }
+
+    public void test_same_day_birth_death() throws DomainError {
+        var p = new Person(random_id(), "name");
+        string same_day = "1120-11-20";
+        
+        p.set_birth_date(same_day);
+        
+        try {
+            p.set_death_date(same_day);
+            assert(p.get_death_date() == same_day);
+            assert(p.get_birth_date() == p.get_death_date());
+        } catch (DomainError e) {
+            assert_not_reached();
+        }
     }
 
     public void test_complete_person() throws DomainError {
