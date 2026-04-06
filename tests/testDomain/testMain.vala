@@ -40,7 +40,7 @@ void add_tests_song() {
     });
 
     Test.add_func("/song/performer", () => {
-        try { song_tests.test_performer(); } catch (Error e) { error(e.message); }
+        try { song_tests.test_performer_id(); } catch (Error e) { error(e.message); }
     });
 
     Test.add_func("/song/path", () => {
@@ -48,7 +48,7 @@ void add_tests_song() {
     });
 
     Test.add_func("/song/album", () => {
-        try { song_tests.test_album(); } catch (Error e) { error(e.message); }
+        try { song_tests.test_album_id(); } catch (Error e) { error(e.message); }
     });
 
     Test.add_func("/song/genre", () => {
