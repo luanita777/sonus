@@ -4,17 +4,21 @@ using GLib;
 static TestSong song_tests;
 static TestPerformerType performer_type_tests;
 static TestPerformer performer_tests;
+static TestAlbum album_tests;
 
 int main(string[] args) {
     
     Test.init(ref args);
+    
     song_tests = new TestSong();
     performer_type_tests = new TestPerformerType();
     performer_tests = new TestPerformer();
+    album_tests = new TestAlbum();
 
     add_tests_song();
     add_tests_performer_type();
     add_tests_performer();
+    add_tests_album();
 
     return Test.run();
 }
@@ -59,9 +63,11 @@ void add_tests_song() {
         try { song_tests.test_track(); } catch (Error e) { error(e.message); }
     });
 
-    Test.add_func("/song/full", () => {
-        try { song_tests.test_song(); } catch (Error e) { error(e.message); }
+    Test.add_func("/song/complete_song", () => {
+        try { song_tests.test_complete_song(); } catch (Error e) { error(e.message); }
     });
+
+    
 }
 
 //register of type-performer tests
@@ -88,6 +94,36 @@ void add_tests_performer(){
     Test.add_func("/performer/type", () => {
             try { performer_tests.test_type(); } catch (Error e) { error(e.message); }
         });
+
+    Test.add_func("/performer/complete_performer", () => {
+            try { performer_tests.test_complete_performer(); } catch (Error e) { error(e.message); }
+        });
+}
+
+void add_tests_album(){
+    Test.add_func("/album/constructor", () => {
+            try { album_tests.test_constructor(); } catch (Error e) { error(e.message); }
+        });
+
+    Test.add_func("/album/id", () => {
+            try { album_tests.test_id(); } catch (Error e) { error(e.message); }
+        });
+    
+    Test.add_func("/album/name", () => {
+            try { album_tests.test_name(); } catch (Error e) { error(e.message); }
+        });
+
+    Test.add_func("/album/path", () => {
+            try { album_tests.test_path(); } catch (Error e) { error(e.message); }
+        });
+
+    Test.add_func("/album/year", () => {
+        try { album_tests.test_year(); } catch (Error e) { error(e.message); }
+    });
+
+    Test.add_func("/album/complete_album", () => {
+        try { album_tests.test_complete_album(); } catch (Error e) { error(e.message); }
+    });
 }
 
 
