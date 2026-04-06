@@ -130,10 +130,11 @@ void add_tests_album(){
 }
 
 void add_tests_person(){
+    
     Test.add_func("/person/constructor", () => {
             try { person_tests.test_constructor(); } catch (Error e) { error(e.message); }
         });
-
+    
     Test.add_func("/person/real_name", () => {
             try { person_tests.test_real_name(); } catch (Error e) { error(e.message); }
         });
@@ -146,6 +147,14 @@ void add_tests_person(){
             try { person_tests.test_chronology_error(); } catch (Error e) { error(e.message); }
         });
 
+    Test.add_func("/person/no_update_if_error_with_dates", () => {
+            try { person_tests.test_no_update_if_error_with_dates(); } catch (Error e) { error(e.message); }
+        });
+
+    Test.add_func("/person/same_birth_death_day", () => {
+            try { person_tests.test_same_day_birth_death(); } catch (Error e) { error(e.message); }
+        });
+    
     Test.add_func("/person/complete_person", () => {
             try { person_tests.test_complete_person(); } catch (Error e) { error(e.message); }
         });
