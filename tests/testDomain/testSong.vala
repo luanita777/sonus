@@ -36,6 +36,7 @@ public class TestSong : Object {
     private int random_year() {
         return 1900 + Random.int_range(0, 150);
     }
+    
     private int random_track() {
         return Random.int_range(1, 80);
     }
@@ -293,7 +294,7 @@ public class TestSong : Object {
         assert(song.get_track() == null);
     }
 
-    public void test_song() throws DomainError {
+    public void test_complete_song() throws DomainError {
         var song = new Song(1,"t", "p", "/p.mp3", "a", "g", 1, 1);
 
         int id = random_id();

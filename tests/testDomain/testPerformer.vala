@@ -108,4 +108,21 @@ public class TestPerformer : Object {
         performer.set_type(PerformerType.UNKNOWN);
         assert(performer.get_performer_type() == PerformerType.UNKNOWN);
     }
+
+    public void test_complete_performer() throws DomainError {
+        var performer =  new Performer(1, PerformerType.PERSON, "person");
+
+        int id = random_id();
+        string name = random_name();
+        PerformerType type = random_type();
+
+        performer.set_id(id);
+        performer.set_name(name);
+        performer.set_type(type);
+
+        assert(performer.get_id() == id);
+        assert(performer.get_name() == name);
+        assert(performer.get_performer_type() == type);
+        
+    }
 }
