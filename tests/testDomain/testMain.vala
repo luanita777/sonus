@@ -5,6 +5,7 @@ static TestSong song_tests;
 static TestPerformerType performer_type_tests;
 static TestPerformer performer_tests;
 static TestAlbum album_tests;
+static TestPerson person_tests;
 
 int main(string[] args) {
     
@@ -14,11 +15,13 @@ int main(string[] args) {
     performer_type_tests = new TestPerformerType();
     performer_tests = new TestPerformer();
     album_tests = new TestAlbum();
+    person_tests = new TestPerson();
 
     add_tests_song();
     add_tests_performer_type();
     add_tests_performer();
     add_tests_album();
+    add_tests_person();
 
     return Test.run();
 }
@@ -124,6 +127,30 @@ void add_tests_album(){
     Test.add_func("/album/complete_album", () => {
         try { album_tests.test_complete_album(); } catch (Error e) { error(e.message); }
     });
+}
+
+void add_tests_person(){
+    Test.add_func("/person/constructor", () => {
+            try { person_tests.test_constructor(); } catch (Error e) { error(e.message); }
+        });
+
+    Test.add_func("/person/real_name", () => {
+            try { person_tests.test_real_name(); } catch (Error e) { error(e.message); }
+        });
+
+    Test.add_func("/person/dates(birth & death)", () => {
+            try { person_tests.test_dates(); } catch (Error e) { error(e.message); }
+        });
+
+    Test.add_func("/person/correct_chronology_in_dates", () => {
+            try { person_tests.test_chronology_error(); } catch (Error e) { error(e.message); }
+        });
+
+    Test.add_func("/person/complete_person", () => {
+            try { person_tests.test_complete_person(); } catch (Error e) { error(e.message); }
+        });
+
+    
 }
 
 
