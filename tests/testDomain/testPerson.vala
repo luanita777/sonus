@@ -137,8 +137,43 @@ public class TestPerson : Object {
             assert_not_reached();
         } catch (DomainError e) {
             assert(e is DomainError.INVALID_DATA);
-        }
+        }    
         
+    }
+
+    public void test_complete_person() throws DomainError {
         
+        int id = random_id();
+        string stage = random_stage_name();
+        string real = random_real_name();
+        string birth = "1970-01-01";
+        string death = "2020-05-15";
+
+        var person = new Person(id, stage, real, birth, death);
+
+        assert(person.get_id() == id);
+        assert(person.get_name() == stage);
+        assert(person.get_performer_type() == PerformerType.PERSON);
+        assert(person.get_real_name() == real);
+        assert(person.get_birth_date() == birth);
+        assert(person.get_death_date() == death);
+
+        //modify everything
+        int new_id = id + 1;
+        string new_stage = "New " + stage;
+        string new_real = "New " + real;
+        
+        person.set_id(new_id);
+        person.set_name(new_stage);
+        person.set_real_name(new_real);
+        person.set_birth_date("1990-01-01");
+        person.set_death_date(null);
+        
+        //check again
+        assert(person.get_id() == new_id);
+        assert(person.get_name() == new_stage);
+        assert(person.get_real_name() == new_real);
+        assert(person.get_birth_date() == "1990-01-01");
+        assert(person.get_death_date() == null);
     }
 }
