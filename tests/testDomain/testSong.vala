@@ -276,6 +276,13 @@ public class TestSong : Object {
             assert(e is DomainError.EMPTY_FIELD);
         }
 
+        try {
+            song.set_genre("    ");
+            assert_not_reached();
+        } catch (Error e) {
+            assert(e is DomainError.EMPTY_FIELD);
+        }
+
         string genre = random_genre();
         song.set_genre("     genre    ");
         assert(song.get_genre() == "genre");
