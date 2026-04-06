@@ -39,18 +39,31 @@ namespace Sonus {
 
         //SETTERS
         public void set_id(int value) throws DomainError{
+            if(value <= 0)
+                throw new DomainError.INVALID_DATA("invalid id-song");
             this._id = value;
         }
 
         public void set_name(string value) throws DomainError{
+            if (value.strip().length == 0)
+                throw new DomainError.EMPTY_FIELD("album name can not be empty");
             this._name = value.strip();
         }
 
         public void set_path(string value) throws DomainError{
+            if (value.strip().length == 0)
+                throw new DomainError.EMPTY_FIELD("path can not be empty");
+            
+            if(value.strip().down().has_suffix(".mp3")){
+                throw new DomainError.INVALID_DATA("path shouldn´t have '.mp3' extension or any extension at all");
+            }
+            
             this._path = value.strip();
         }
 
         public void set_year(int? value) throws DomainError {
+            if (value != null && value < 0)
+                throw new DomainError.INVALID_DATA("year can not be negative");
             this._year = value;
         }
 
