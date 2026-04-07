@@ -6,6 +6,7 @@ static TestPerformerType performer_type_tests;
 static TestPerformer performer_tests;
 static TestAlbum album_tests;
 static TestPerson person_tests;
+static TestGroup group_tests;
 
 int main(string[] args) {
     
@@ -16,12 +17,14 @@ int main(string[] args) {
     performer_tests = new TestPerformer();
     album_tests = new TestAlbum();
     person_tests = new TestPerson();
+    group_tests = new TestGroup();
 
     add_tests_song();
     add_tests_performer_type();
     add_tests_performer();
     add_tests_album();
     add_tests_person();
+    add_tests_group();
 
     return Test.run();
 }
@@ -160,6 +163,32 @@ void add_tests_person(){
         });
 
     
+}
+
+void add_tests_group(){
+    Test.add_func("/group/constructor", () => {
+            try { group_tests.test_constructor(); } catch (Error e) { error(e.message); }
+        });
+
+     Test.add_func("/group/dates(start & end)", () => {
+            try { group_tests.test_dates(); } catch (Error e) { error(e.message); }
+        });
+
+    Test.add_func("/group/correct_chronology_in_dates", () => {
+            try { group_tests.test_chronology_error(); } catch (Error e) { error(e.message); }
+        });
+
+    Test.add_func("/group/no_update_if_error_with_dates", () => {
+            try { group_tests.test_no_update_if_error_with_dates(); } catch (Error e) { error(e.message); }
+        });
+
+    Test.add_func("/group/same_start_end_day", () => {
+            try { group_tests.test_same_day_start_end(); } catch (Error e) { error(e.message); }
+        });
+    
+    Test.add_func("/group/complete_person", () => {
+            try { group_tests.test_complete_group(); } catch (Error e) { error(e.message); }
+        });
 }
 
 
