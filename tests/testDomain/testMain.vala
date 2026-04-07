@@ -7,6 +7,7 @@ static TestPerformer performer_tests;
 static TestAlbum album_tests;
 static TestPerson person_tests;
 static TestGroup group_tests;
+static TestGroupMembership groupMembership_tests;
 
 int main(string[] args) {
     
@@ -18,6 +19,7 @@ int main(string[] args) {
     album_tests = new TestAlbum();
     person_tests = new TestPerson();
     group_tests = new TestGroup();
+    groupMembership_tests = new TestGroupMembership();
 
     add_tests_song();
     add_tests_performer_type();
@@ -25,6 +27,7 @@ int main(string[] args) {
     add_tests_album();
     add_tests_person();
     add_tests_group();
+    add_tests_groupMembership();
 
     return Test.run();
 }
@@ -188,6 +191,21 @@ void add_tests_group(){
     
     Test.add_func("/group/complete_group", () => {
             try { group_tests.test_complete_group(); } catch (Error e) { error(e.message); }
+        });
+}
+
+
+void add_tests_groupMembership(){
+    Test.add_func("/groupMembership/constructor", () => {
+            try { groupMembership_tests.test_constructor(); } catch (Error e) { error(e.message); }
+        });
+
+     Test.add_func("/groupMembership/invalid_ids", () => {
+            try { groupMembership_tests.test_invalid_ids(); } catch (Error e) { error(e.message); }
+        });
+
+     Test.add_func("/groupMembership/setters", () => {
+            try { groupMembership_tests.test_setters(); } catch (Error e) { error(e.message); }
         });
 }
 
