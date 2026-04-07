@@ -8,7 +8,7 @@ namespace Sonus{
         private string? _end_date;
 
         //constructor
-        public Group(int id, string stage_name, string? start_date, string? end_date) throws DomainError{
+        public Group(int id, string stage_name, string? start_date = null, string? end_date = null) throws DomainError{
             base(id, PerformerType.GROUP, stage_name);
             this._start_date = start_date;
             this._end_date = end_date;
