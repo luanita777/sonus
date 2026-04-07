@@ -186,7 +186,7 @@ void add_tests_group(){
             try { group_tests.test_same_day_start_end(); } catch (Error e) { error(e.message); }
         });
     
-    Test.add_func("/group/complete_person", () => {
+    Test.add_func("/group/complete_group", () => {
             try { group_tests.test_complete_group(); } catch (Error e) { error(e.message); }
         });
 }
