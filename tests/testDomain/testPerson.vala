@@ -21,12 +21,6 @@ public class TestPerson : Object {
             + LAST_NAMES[Random.int_range(0, LAST_NAMES.length)];
     }
     
-    private string random_date() {
-        int year = Random.int_range(1950, 2025);
-        int month = Random.int_range(1, 13);
-        int day = Random.int_range(1, 28);
-        return "%04d-%02d-%02d".printf(year, month, day);
-    }
     
     // --- TESTS ---
     
