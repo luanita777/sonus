@@ -12,9 +12,9 @@ namespace Sonus{
                       string? birth_date = null, string? death_date = null) throws DomainError {
             
             base(id, PerformerType.PERSON, stage_name);
-            this._real_name = real_name;
-            this._birth_date = birth_date;
-            this._death_date = death_date;
+            set_real_name(real_name);
+            set_birth_date(birth_date);
+            set_death_date(death_date);
         }
 
         //GETTERS
