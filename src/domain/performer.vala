@@ -10,7 +10,7 @@ namespace Sonus {
         private string _name;
         
         //cosntructor
-        public Performer(int id, PerformerType type, string name) throws DomainError{
+        public Performer(int id = -1, PerformerType type, string name) throws DomainError{
             this.set_id(id);
             this.set_type(type);
             this.set_name(name);
@@ -33,6 +33,11 @@ namespace Sonus {
         
         //Setters
         public void set_id(int value) throws DomainError {
+            if (value == -1) {
+                this._id = value;
+                return;
+            }
+            
             if(value <= 0)
                 throw new DomainError.INVALID_DATA("invalid id-performer");
             this._id = value;

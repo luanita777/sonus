@@ -12,9 +12,12 @@ dependencies = [
 # Source files
 domain_sources = files(
     'src/domain/album.vala',
-    'src/domain/errors.vala',	
+    'src/domain/errors.vala',
+    'src/domain/group.vala',
+    'src/domain/groupMembership.vala',
     'src/domain/performerType.vala',
     'src/domain/performer.vala',
+    'src/domain/person.vala',
     'src/domain/song.vala'
 )
 
@@ -32,9 +35,12 @@ db_sources = files(
 # Test files
 domain_test_sources = files(
     'tests/testDomain/testAlbum.vala',
+    'tests/testDomain/testGroup.vala',
+    'tests/testDomain/testGroupMembership.vala',
     'tests/testDomain/testSong.vala',
     'tests/testDomain/testPerformerType.vala',
     'tests/testDomain/testPerformer.vala',
+    'tests/testDomain/testPerson.vala',
     'tests/testDomain/testDomain.vala'
 )
 
