@@ -10,7 +10,7 @@ namespace Sonus {
         private int?   _year;
 
         //constructor
-        public Album(int id, string name, string path,  int? year = null) throws DomainError {
+        public Album(int id = -1, string name, string path,  int? year = null) throws DomainError {
             this.set_id(id);
             this.set_name(name);
             this.set_path(path);
@@ -39,6 +39,11 @@ namespace Sonus {
 
         //SETTERS
         public void set_id(int value) throws DomainError{
+            if (value == -1) {
+                this._id = value;
+                return;
+            }
+                        
             if(value <= 0)
                 throw new DomainError.INVALID_DATA("invalid id-song");
             this._id = value;
