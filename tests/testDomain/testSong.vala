@@ -54,10 +54,17 @@ public class TestSong : Object {
         }
                 
         try {
-            new Song(-1,"t", p, "/p.mp3");
+            new Song(-2,"t", p, "/p.mp3");
             assert_not_reached();
         } catch (Error e) {
             assert(e is DomainError.INVALID_DATA);
+        }
+
+        try {
+            var s = new Song(-1, "t", 1, "/p.mp3");
+            assert(s.get_id() == -1);
+        } catch (Error e) {
+            assert_not_reached();
         }
         
         try {
@@ -82,6 +89,13 @@ public class TestSong : Object {
         }
 
         try {
+            var s = new Song(1, "t", null, "/p.mp3");
+            assert(s.get_performer_id() == null);
+        } catch (Error e) {
+            assert_not_reached();
+        }
+
+        try {
             new Song(r, "t", p, "");
             assert_not_reached();
         } catch (Error e) {
@@ -90,7 +104,7 @@ public class TestSong : Object {
 
         int id = random_id();
         string title = random_title();
-        int performer_id = random_performer_id();
+        int? performer_id = random_performer_id();
         string path = random_path();
         int? album_id = random_album_id();
         string genre = random_genre();
@@ -120,6 +134,13 @@ public class TestSong : Object {
         }
 
         try {
+            song.set_id(-1);
+            assert(song.get_id() == -1);
+        } catch (Error e) {
+            assert_not_reached();
+        }
+
+        try {
             song.set_id(0);
             assert_not_reached();
         } catch (DomainError e) {
@@ -127,7 +148,7 @@ public class TestSong : Object {
         }
 
         try {
-            song.set_id(-1);
+            song.set_id(-2);
             assert_not_reached();
         } catch (DomainError e) {
             assert(e is DomainError.INVALID_DATA);
@@ -166,6 +187,13 @@ public class TestSong : Object {
 
     public void test_performer_id() throws DomainError {
         var song = new Song(1, "t", 1, "/p.mp3");
+
+        try {
+            song.set_performer_id(null);
+            assert(song.get_performer_id() == null);
+        } catch (Error e) {
+            assert_not_reached();
+        }
 
         try {
             song.set_performer_id(10);

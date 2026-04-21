@@ -6,7 +6,7 @@ namespace Sonus {
         
         private int     _id;
         private string  _title;
-        private int     _performer_id;
+        private int?     _performer_id;
         private string  _path;
         private int?    _album_id;
         private string? _genre;
@@ -15,7 +15,7 @@ namespace Sonus {
     
 
         //Constructor
-        public Song(int id, string title, int performer_id, string path, 
+        public Song(int id = -1, string title, int? performer_id, string path, 
                     int? album_id = null, string? genre = null, 
                     int? year = null, int? track = null) throws DomainError {
             
@@ -38,7 +38,7 @@ namespace Sonus {
             return this._title;
         }
         
-        public int get_performer_id() {
+        public int? get_performer_id() {
             return this._performer_id;
         }
         
@@ -65,8 +65,14 @@ namespace Sonus {
         
         // SETTERS
         public void set_id(int value) throws DomainError{
-            if(value <= 0)
+            if (value == -1) {
+                this._id = value;
+                return;
+            }
+            
+            if (value <= 0) {
                 throw new DomainError.INVALID_DATA("Song ID must be greater than 0.");
+            }
             this._id = value;
         }
         
@@ -76,8 +82,8 @@ namespace Sonus {
             this._title = value.strip();
         }
         
-        public void set_performer_id(int value) throws DomainError {
-            if (value <= 0) {
+        public void set_performer_id(int? value) throws DomainError {
+            if (value != null && value <= 0) {
                 throw new DomainError.INVALID_DATA("Performer ID must be greater than 0.");
             }
             this._performer_id = value;
