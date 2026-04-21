@@ -36,7 +36,7 @@ public class TestAlbum : Object {
 
         
         try{
-            new Album(-1, "n", "/p");
+            new Album(-5, "n", "/p");
             assert_not_reached();
         } catch (Error e){
             assert(e is DomainError.INVALID_DATA);
@@ -82,6 +82,13 @@ public class TestAlbum : Object {
         }
 
         try {
+            album.set_id(-1);
+            assert(album.get_id() == -1);
+        } catch (Error e) {
+            assert_not_reached();
+        }
+
+        try {
             album.set_id(0);
             assert_not_reached();
         } catch (DomainError e) {
@@ -89,7 +96,7 @@ public class TestAlbum : Object {
         }
 
         try {
-            album.set_id(-1);
+            album.set_id(-5);
             assert_not_reached();
         } catch (DomainError e) {
             assert(e is DomainError.INVALID_DATA);

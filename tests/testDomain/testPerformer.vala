@@ -43,7 +43,7 @@ public class TestPerformer : Object {
         }
 
         try {
-            new Performer(-1, type, name);
+            new Performer(-5, type, name);
             assert_not_reached();
         } catch (DomainError e) {
             assert(e is  DomainError.INVALID_DATA);
@@ -66,6 +66,13 @@ public class TestPerformer : Object {
 
         performer.set_id(new_id);
         assert(performer.get_id() == new_id);
+
+        try {
+            performer.set_id(-1);
+            assert(performer.get_id() == -1);
+        } catch (Error e) {
+            assert_not_reached();
+        }
         
         try {
             performer.set_id(0);
