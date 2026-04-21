@@ -6,6 +6,7 @@ dependencies = [
     dependency('gobject-2.0'),
     dependency('gio-2.0'),
     dependency('sqlite3'),
+    dependency('gee-0.8')
 ]
 
 # Source files
@@ -18,7 +19,14 @@ domain_sources = files(
 )
 
 db_sources = files(
-    'src/db/dataBaseManager.vala'
+    'src/db/dataBaseManager.vala',
+    'src/db/dao/mainDAO.vala',
+    'src/db/dao/songDAO.vala',
+    'src/db/dao/performerDAO.vala',
+    'src/db/dao/albumDAO.vala',
+    'src/db/dao/personDAO.vala',
+    'src/db/dao/groupDAO.vala',
+    'src/db/dao/membershipDAO.vala',
 )
 
 # Test files
@@ -32,7 +40,14 @@ domain_test_sources = files(
 
 db_test_sources = files (
     'tests/testDB/testDataBaseManager.vala',
-    'tests/testDB/testDB.vala'
+    'tests/testDB/testDB.vala',
+    'tests/testDB/DAO/baseTestDAO.vala',
+    'tests/testDB/DAO/testSongDAO.vala',
+    'tests/testDB/DAO/testPerformerDAO.vala',
+    'tests/testDB/DAO/testAlbumDAO.vala',
+    'tests/testDB/DAO/testPersonDAO.vala',
+    'tests/testDB/DAO/testGroupDAO.vala',
+    'tests/testDB/DAO/testMembershipDAO.vala',
 )
 
 test_main = files('tests/testMain.vala')
