@@ -5,8 +5,6 @@ public class TestSong : Object {
 
     // Examples
     private static string[] TITLES = {"Song A", "Song B", "Song C", "Song D", "Song E"};
-    private static string[] PERFORMERS = {"P1", "P2", "P3", "P4", "P5"};
-    private static string[] ALBUMS = {"Album1", "Album2", "Album3", "Album4", "Album5"};
     private static string[] GENRES = {"G1", "G2", "G3", "G4", "G5"};
 
     private int random_id(){
@@ -271,6 +269,13 @@ public class TestSong : Object {
 
         try {
             song.set_genre("");
+            assert_not_reached();
+        } catch (Error e) {
+            assert(e is DomainError.EMPTY_FIELD);
+        }
+
+        try {
+            song.set_genre("    ");
             assert_not_reached();
         } catch (Error e) {
             assert(e is DomainError.EMPTY_FIELD);
