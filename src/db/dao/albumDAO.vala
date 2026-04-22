@@ -7,13 +7,13 @@ namespace Sonus.DAO {
     public class DAO {
         
         // ALBUM WRITERS //        
-        public void save_album(Album album) throws Error {
+        public void insert_album(Album album) throws Error {
             
         }
-        
-        public void delete_album(int id) throws Error {
+
+        public void update_album(Album album) throws Error {
             
-        }
+        }        
         
         
         // ALBUM CONSULTS //

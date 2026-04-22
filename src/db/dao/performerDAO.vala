@@ -7,9 +7,13 @@ namespace Sonus.DAO {
     public class DAO {
 
         // PERFORMER WRITERS //        
-        public void save_performer(Performer performer) throws Error {
+        public void insert_performer(Performer performer) throws Error {
             
         }
+
+        public void update_performer(Performer performer) throws Error{
+            
+        }        
         
         public void delete_performer(int id) throws Error {
             

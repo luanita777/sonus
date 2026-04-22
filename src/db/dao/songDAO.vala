@@ -7,11 +7,11 @@ namespace Sonus.DAO {
     public class DAO {
                 
         // SONG WRITERS //        
-        public void save_song(Song song) throws Error {
+        public void insert_song(Song song) throws Error {
             
         }
 
-        public void delete_song(int id) throws Error {
+        public void update_song(Song song) throws Error{
             
         }
 
