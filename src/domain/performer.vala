@@ -10,7 +10,7 @@ namespace Sonus {
         private string _name;
         
         //cosntructor
-        public Performer(int id = -1, PerformerType type, string name) throws DomainError{
+        public Performer(int id = -1, PerformerType type = PerformerType.UNKNOWN, string name) throws DomainError{
             this.set_id(id);
             this.set_type(type);
             this.set_name(name);
