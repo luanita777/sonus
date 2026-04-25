@@ -6,6 +6,7 @@ int main(string[] args) {
 
     add_domain_tests();
     add_db_tests();
+    add_dao_tests();
 
     return Test.run();
 }
