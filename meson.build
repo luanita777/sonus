@@ -23,6 +23,9 @@ domain_sources = files(
 
 db_sources = files(
     'src/db/dataBaseManager.vala',
+)
+
+dao_sources = files (
     'src/db/dao/mainDAO.vala',
     'src/db/dao/songDAO.vala',
     'src/db/dao/performerDAO.vala',
@@ -44,23 +47,26 @@ domain_test_sources = files(
     'tests/testDomain/testDomain.vala'
 )
 
-db_test_sources = files (
+db_test_sources = files(
     'tests/testDB/testDataBaseManager.vala',
-    'tests/testDB/testDB.vala',
-    'tests/testDB/DAO/baseTestDAO.vala',
-    'tests/testDB/DAO/testSongDAO.vala',
-    'tests/testDB/DAO/testPerformerDAO.vala',
-    'tests/testDB/DAO/testAlbumDAO.vala',
-    'tests/testDB/DAO/testPersonDAO.vala',
-    'tests/testDB/DAO/testGroupDAO.vala',
-    'tests/testDB/DAO/testMembershipDAO.vala',
+    'tests/testDB/testDB.vala',    
+)
+
+dao_test_sources = files (	
+    'tests/testDB/testDAO/baseTestDAO.vala',
+    'tests/testDB/testDAO/testSongDAO.vala',
+    'tests/testDB/testDAO/testPerformerDAO.vala',
+    'tests/testDB/testDAO/testAlbumDAO.vala',
+    'tests/testDB/testDAO/testPersonDAO.vala',
+    'tests/testDB/testDAO/testGroupDAO.vala',
+    'tests/testDB/testDAO/testMembershipDAO.vala',
 )
 
 test_main = files('tests/testMain.vala')
 
 # Make the executable
-all_sources = db_sources + domain_sources
-all_tests = domain_test_sources + db_test_sources + test_main
+all_sources = domain_sources + db_sources + dao_sources
+all_tests = domain_test_sources + db_test_sources + dao_test_sources + test_main
 
 test_exe = executable('testProgram',
     all_sources + all_tests,
