@@ -1,6 +1,5 @@
 using GLib;
 
-
 static TestSong song_tests;
 static TestPerformerType performer_type_tests;
 static TestPerformer performer_tests;
@@ -9,9 +8,7 @@ static TestPerson person_tests;
 static TestGroup group_tests;
 static TestGroupMembership groupMembership_tests;
 
-int main(string[] args) {
-    
-    Test.init(ref args);
+public void add_domain_tests (){
     
     song_tests = new TestSong();
     performer_type_tests = new TestPerformerType();
@@ -29,7 +26,6 @@ int main(string[] args) {
     add_tests_group();
     add_tests_groupMembership();
 
-    return Test.run();
 }
 
 //register of song tests
