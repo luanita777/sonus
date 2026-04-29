@@ -7,6 +7,7 @@ int main(string[] args) {
     add_domain_tests();
     add_db_tests();
     add_dao_tests();
+    add_miner_tests();
 
     return Test.run();
 }
