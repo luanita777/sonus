@@ -8,6 +8,8 @@ namespace Sonus.DAO {
 
         // PERFORMER WRITERS //        
         public void insert_performer(Performer performer) throws Error {
+            if(find_performer_by_exact_name(performer.get_name()) != null)
+                return;
             var sql = "INSERT INTO performers (id_type, name) VALUES (?, ?)";
             var stmt = prepare(sql);
             performer_to_row(stmt, performer);
@@ -32,6 +34,18 @@ namespace Sonus.DAO {
                 return row_to_performer(stmt);
             return null;
         }
+
+        public int? find_performer_by_exact_name(string? name) throws Error{
+            if(name == null)
+                return null;
+            
+            var stmt = prepare("SELECT id_performer FROM performers WHERE name = ?");
+            stmt.bind_text(1, name.down().strip());
+            if(stmt.step() == Sqlite.ROW)
+                return stmt.column_int(0);
+            return null;
+        }
+      
 
         public ArrayList<Performer> find_all_performers() throws Error {
             return fetch_performers(prepare("SELECT * FROM performers"));
@@ -68,5 +82,7 @@ namespace Sonus.DAO {
                 list.add(row_to_performer(stmt));
             return list;
         }
+       
+        
     }
 }
