@@ -10,7 +10,7 @@ int main(string[] args) {
     var app = new Adw.Application ("sonus.app", 0);
 
     app.activate.connect (() => {
-        var window = new SonusMainWindow (app);
+        var window = new MainWindow (app);
         window.present ();
     });
 
