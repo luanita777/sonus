@@ -9,11 +9,39 @@ vapi_args = ['--vapidir',
 dependencies = [
     dependency('glib-2.0'),
     dependency('gobject-2.0'),
-    dependency('gio-2.0'),
-    dependency('sqlite3'),
+    dependency('gtk4'),
+    dependency('libadwaita-1'),
     dependency('gee-0.8'),
+    dependency('sqlite3'),
     dependency('taglib_c')
 ]
+
+gnome = import('gnome')
+
+
+#Blueprint resources
+
+blueprint_compiler = find_program('blueprint-compiler')
+blueprints = custom_target('blueprints',
+  input: files(
+    'resources/ui/main_window.blp',
+    'resources/ui/song_list_view.blp'
+  ),
+  output: [
+    'main_window.ui',
+    'song_list_view.ui'
+  ],
+  command: [blueprint_compiler, 'batch-compile', '@OUTDIR@', '@CURRENT_SOURCE_DIR@', '@INPUT@']
+)
+
+resources = gnome.compile_resources('sonus-resources',
+  'data/sonus.gresource.xml',
+  source_dir: [
+    'data',
+    join_paths(meson.current_build_dir(), 'resources', 'ui')
+  ],
+  dependencies: blueprints
+)
    
 
 # Source files
@@ -47,6 +75,12 @@ miner_sources = files (
     'src/miner/fileReader.vala',
     'src/miner/metadataReader.vala',
     'src/miner/miner.vala'
+)
+
+gui_sources = files(
+    'src/gui/main_window.vala',
+    'src/gui/view/songs_list_view.vala',
+    'src/gui/controller/songs_controller.vala'
 )
 
 main_file = files('src/main.vala')
@@ -86,14 +120,20 @@ miner_test_sources = files (
 
 test_main = files('tests/testMain.vala')
 
+vapi_args = [
+    '--vapidir', join_paths(meson.current_source_dir(), 'vapi'),
+    '--gresourcesdir', join_paths(meson.current_build_dir(), 'resources', 'ui')
+]
 
 # Make the executable
-all_sources = domain_sources + db_sources + dao_sources + miner_sources
+all_sources = domain_sources + db_sources + dao_sources + miner_sources + gui_sources
 all_tests = domain_test_sources + db_test_sources + dao_test_sources + miner_test_sources + test_main
 
 # Define main executable
 sonus_exe = executable('sonus',
     all_sources + main_file,
+    blueprints,
+    resources,
     dependencies: dependencies,
     vala_args: vapi_args,
     c_args: ['-w']
@@ -102,8 +142,10 @@ sonus_exe = executable('sonus',
 # Define main-test exacutable
 test_exe = executable('testProgram',
     all_sources + all_tests,
+    blueprints,
+    resources,
     dependencies: dependencies,
-    vala_args: vapi_args,
+    vala_args: vapi_args,    
     c_args: ['-w']
 )
 
