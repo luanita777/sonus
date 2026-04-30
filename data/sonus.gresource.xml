@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gresources>
+  <gresource prefix="/sonus/app">
+    <file preprocess="xml-stripblanks">main_window.ui</file>
+    <file preprocess="xml-stripblanks">song_list_view.ui</file>
+  </gresource>
+</gresources>

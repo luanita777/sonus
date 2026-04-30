@@ -1,0 +1,25 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $SonusMainWindow : Adw.ApplicationWindow {
+  default-width: 600;
+  default-height: 400;
+  title: "Sonus";
+
+  Adw.ToolbarView {
+    [top]
+    Adw.HeaderBar {}
+
+    content: Box {
+      orientation: vertical;
+      valign: center;
+      halign: center;
+      spacing: 12;
+
+      Label {
+        label: "¡Sonus está funcionando!";
+        styles ["title-1"]
+      }
+    };
+  }
+}
