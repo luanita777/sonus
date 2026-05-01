@@ -89,7 +89,8 @@ namespace Sonus.Db {
         //auxiliary method that writes the schema on the .db file to create the tables and so
         private void write_schema() throws Error {
             string? schema_path = Environment.get_variable("SCHEMA_PATH");
-            if (schema_path == null) throw new DatabaseError.FAILED("SCHEMA_PATH is not defined.");
+            if (schema_path == null)
+                throw new DatabaseError.FAILED("SCHEMA_PATH is not defined.");
 
             File schema_file = File.new_for_path(schema_path);
             uint8[] contents;
