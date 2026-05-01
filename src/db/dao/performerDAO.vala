@@ -8,8 +8,10 @@ namespace Sonus.DAO {
 
         // PERFORMER WRITERS //        
         public void insert_performer(Performer performer) throws Error {
-            if(find_performer_by_exact_name(performer.get_name()) != null)
+            var existing_id = find_performer_by_exact_name(performer.get_name());
+            if (existing_id != null) 
                 return;
+            
             var sql = "INSERT INTO performers (id_type, name) VALUES (?, ?)";
             var stmt = prepare(sql);
             performer_to_row(stmt, performer);
@@ -39,7 +41,7 @@ namespace Sonus.DAO {
             if(name == null)
                 return null;
             
-            var stmt = prepare("SELECT id_performer FROM performers WHERE name = ?");
+            var stmt = prepare("SELECT id_performer FROM performers WHERE LOWER(name) = LOWER(?)");
             stmt.bind_text(1, name.down().strip());
             if(stmt.step() == Sqlite.ROW)
                 return stmt.column_int(0);
@@ -73,7 +75,7 @@ namespace Sonus.DAO {
         
         private void performer_to_row(Statement stmt, Performer performer) throws Error {
             stmt.bind_int(1, (int)performer.get_performer_type());
-            stmt.bind_text(2, performer.get_name());
+            stmt.bind_text(2, performer.get_name().strip());
         }
 
         private ArrayList<Performer> fetch_performers(Statement stmt) throws Error{

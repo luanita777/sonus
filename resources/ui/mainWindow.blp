@@ -13,6 +13,20 @@ template $MainWindow : Adw.ApplicationWindow {
       };
 
       [start]
+      Button mine_songs_btn{
+	child: Box{
+	  spacing: 8;
+	  halign: center;
+	  Image{
+	    icon-name: "emblem-system-symbolic";
+	  }
+	  Label {
+	    label: "Mine Songs";
+	  }
+	};
+      }
+
+      [start]
       Button create_person_btn {
 	child: Box {
 	  spacing: 8;
@@ -45,15 +59,11 @@ template $MainWindow : Adw.ApplicationWindow {
       Box {
         styles ["linked"]
         Button list_btn { 
-            icon-name: "view-list-symbolic"; 
-        }
-	
-        Button grid_btn { 
-            icon-name: "view-grid-symbolic";         
-        }
+          icon-name: "view-list-symbolic"; 
+        }	
       }
     }
-
+    
     content: Box {
       orientation: vertical;
       spacing: 12;
@@ -89,23 +99,14 @@ template $MainWindow : Adw.ApplicationWindow {
         hexpand: true;
         vexpand: true;
 
-        StackPage {
-          name: "list";
-          child: ScrolledWindow {
-            child: ListView list_view {
-
-            };
-          };
-        }
-
-        StackPage {
-          name: "grid";
-          child: ScrolledWindow {
-            child: GridView grid_view {
-
-            };
-          };
-        }
+	StackPage {
+	  name: "list";
+	  child: ScrolledWindow {
+	    child: ListBox list_box {
+              selection-mode: none;
+	    };
+	  };
+	}
 	
       }
     };
