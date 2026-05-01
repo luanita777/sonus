@@ -6,32 +6,26 @@ using Sonus.Db;
 
 int main(string[] args) {
     Adw.init ();
-
-    var app = new Adw.Application ("sonus.app", 0);
-
-    app.activate.connect (() => {
-        var window = new MainWindow (app);
-        window.present ();
-    });
-
-    return app.run (args);
     
-    //var db = DatabaseManager.get_DBM();
-    
-    //try {
-    //  db.open();
+    var dao = new Sonus.DAO.DAO();
+    var db = DatabaseManager.get_DBM();
+    try {
+        db.open();
+        string path = args[1];
+            
+        var app = new Adw.Application ("sonus.app", 0);
         
-    //  string path = args[1];
-    //  var miner = new Miner();   
-
-    //  miner.mine(path);
-    //  return 0;
+        app.activate.connect (() => {
+                var window = new MainWindow (app, dao);
+                window.present ();
+            });
         
-    //} catch (Error e){
-    //  stderr.printf("An error ocurred,  we are sorry. \nDetails: %s\n", e.message);
-    //  return -1;
-    //} finally{
-    //  db.close();
-    //}
+        return app.run(args);
+    } catch (Error e){
+        stderr.printf("An error ocurred,  we are sorry. \nDetails: %s\n", e.message);
+        return -1;
+    } finally{
+        db.close();
+    }
     
 }
