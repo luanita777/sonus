@@ -24,12 +24,14 @@ gnome = import('gnome')
 blueprint_compiler = find_program('blueprint-compiler')
 blueprints = custom_target('blueprints',
   input: files(
-    'resources/ui/main_window.blp',
-    'resources/ui/song_list_view.blp'
+    'resources/ui/mainWindow.blp',   
+    'resources/ui/personDialog.blp',
+    'resources/ui/groupDialog.blp'
   ),
   output: [
-    'main_window.ui',
-    'song_list_view.ui'
+    'mainWindow.ui',
+    'personDialog.ui',
+    'groupDialog.ui'
   ],
   command: [blueprint_compiler, 'batch-compile', '@OUTDIR@', '@CURRENT_SOURCE_DIR@', '@INPUT@']
 )
@@ -38,7 +40,7 @@ resources = gnome.compile_resources('sonus-resources',
   'data/sonus.gresource.xml',
   source_dir: [
     'data',
-    join_paths(meson.current_build_dir(), 'resources', 'ui')
+    join_paths(meson.current_build_dir(), 'resources', 'ui')   
   ],
   dependencies: blueprints
 )
@@ -78,9 +80,11 @@ miner_sources = files (
 )
 
 gui_sources = files(
-    'src/gui/main_window.vala',
-    'src/gui/view/songs_list_view.vala',
-    'src/gui/controller/songs_controller.vala'
+    'src/gui/mainWindow.vala',
+    'src/gui/personDialog.vala',
+    'src/gui/groupDialog.vala'
+    #'src/gui/view/songs_list_view.vala',
+    #'src/gui/controller/songs_controller.vala'
 )
 
 main_file = files('src/main.vala')

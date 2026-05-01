@@ -12,17 +12,34 @@ template $MainWindow : Adw.ApplicationWindow {
         title: "Sonus";
       };
 
-      [end]
+      [start]
       Button create_person_btn {
-        label: "Create Person";
-        icon-name: "avatar-default-symbolic";
+	child: Box {
+	  spacing: 8;
+	  halign: center;
+	  Image{
+	    icon-name: "avatar-default-symbolic";
+	  }
+	  Label {
+	    label: "Create Person";
+	  }
+	};
       }
 
-      [end]
+      [start]
       Button create_group_btn {
-        label: "Create Group";
-        icon-name: "system-users-symbolic";
+	child: Box {
+	  spacing: 8;
+	  halign: center;
+	  Image{
+	    icon-name: "system-users-symbolic";
+	  }
+	  Label {
+	    label: "Create Group";
+	  }
+	};
       }
+
 
       [end]
       Box {
@@ -55,12 +72,11 @@ template $MainWindow : Adw.ApplicationWindow {
 
         Box {
           styles ["linked"]
-          Button { label: "&&"; }
-          Button { label: "||"; }
-          Button { label: "-"; }
-          Button { label: "("; }
-          Button { label: ")"; }
-          Button { label: ", "; }
+          Button btn_and         { label: "&&"; }
+          Button btn_or          { label: "||"; }
+          Button btn_not         { label: "-"; }
+          Button btn_parenthesis { label: "()"; }
+          Button btn_comma       { label: ", "; }
         }
       }
 
