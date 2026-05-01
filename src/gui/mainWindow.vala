@@ -1,3 +1,6 @@
+using Sonus;
+using Sonus.DAO;
+
 [GtkTemplate (ui = "/sonus/app/mainWindow.ui")]
 public class MainWindow : Adw.ApplicationWindow {
     
@@ -35,11 +38,14 @@ public class MainWindow : Adw.ApplicationWindow {
     [GtkChild]
     private unowned Gtk.Button btn_comma;
 
+    private unowned Sonus.DAO.DAO dao;
+
     [GtkChild]
     private unowned Gtk.SearchEntry search_entry;
     
-    public MainWindow (Gtk.Application app) {
+    public MainWindow (Gtk.Application app, Sonus.DAO.DAO _dao) {
         Object (application: app);
+        this.dao = _dao;
         
         list_btn.clicked.connect (() => {
                 main_stack.visible_child_name = "list";
@@ -50,14 +56,14 @@ public class MainWindow : Adw.ApplicationWindow {
             });
         
         create_person_btn.clicked.connect (() => {
-                var dialog = new PersonDialog(this);
+                var dialog = new PersonDialog(this, dao);
                 dialog.set_transient_for(this);
                 dialog.set_modal(true);
                 dialog.present();
             });
         
         create_group_btn.clicked.connect (() => {
-                var dialog = new GroupDialog(this);
+                var dialog = new GroupDialog(this, dao);
                 dialog.set_transient_for(this);
                 dialog.set_modal(true);
                 dialog.present();
