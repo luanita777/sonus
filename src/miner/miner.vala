@@ -12,10 +12,10 @@ namespace Sonus.Miner {
         private Sonus.DAO.DAO _dao;
         private ArrayList<string> _found_files;
 
-        public Miner() {
+        public Miner(Sonus.DAO.DAO dao) {
             this._reader = new FileReader();
             this._mdr = new MetadataReader();
-            this._dao = new Sonus.DAO.DAO();
+            this._dao = dao;
             this._found_files = new Gee.ArrayList<string>();
         }
 
