@@ -76,26 +76,30 @@ public class EditPersonDialog : Adw.Window {
     }
 
     private void load_person_data(int id) {
-        var person = dao.find_person_by_id(id);
-        if (person != null) {
-            stage_name_entry.text = person.get_name();
-            
-            var real_name = person.get_real_name();
-            if (real_name != null) {
-                real_name_entry.text = real_name;
+        try{
+            var person = dao.find_person_by_id(id);
+            if (person != null) {
+                stage_name_entry.text = person.get_name();
+                
+                var real_name = person.get_real_name();
+                if (real_name != null) {
+                    real_name_entry.text = real_name;
+                }
+                
+                var birth_date = person.get_birth_date();
+                if (birth_date != null) {
+                    birth_date_str = birth_date;
+                    birth_date_btn.label = birth_date_str;
+                }
+                
+                var death_date = person.get_death_date();
+                if (death_date != null) {
+                    death_date_str = death_date;
+                    death_date_btn.label = death_date_str;
+                }
             }
-            
-            var birth_date = person.get_birth_date();
-            if (birth_date != null) {
-                birth_date_str = birth_date;
-                birth_date_btn.label = birth_date_str;
-            }
-
-            var death_date = person.get_death_date();
-            if (death_date != null) {
-                death_date_str = death_date;
-                death_date_btn.label = death_date_str;
-            }
+        } catch(Error e){
+            show_error("An error ocurred trying to load person data. " + e.message);
         }
     }
 
@@ -161,6 +165,8 @@ public class EditPersonDialog : Adw.Window {
             show_error("Error updating person: " + e.message);
         } catch (DomainError e) {
             show_error("Error with the person data validation: " + e.message);
+        } catch (Error e){
+            show_error("An error ocurred. We are sorry. " + e.message);
         }
     }
 

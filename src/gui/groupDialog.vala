@@ -11,14 +11,10 @@ public class GroupDialog : Adw.Window {
     [GtkChild]
     private unowned Gtk.MenuButton start_date_btn;
     [GtkChild]
-    private unowned Adw.ButtonContent start_date_content;
-    [GtkChild]
     private unowned Gtk.Calendar start_date_calendar;
     
     [GtkChild]
     private unowned Gtk.MenuButton end_date_btn;
-    [GtkChild]
-    private unowned Adw.ButtonContent end_date_content;
     [GtkChild]
     private unowned Gtk.Calendar end_date_calendar;
 

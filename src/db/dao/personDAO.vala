@@ -8,7 +8,7 @@ namespace Sonus.DAO{
     public partial class DAO {
 
          // PERSON WRITERS //        
-        public void insert_person(Person person) throws DAOError{
+        public void insert_person(Person person) throws Error {
             Performer performer;
             if(person.get_id() != -1)
                 performer = new Performer(person.get_id(), (int)PerformerType.PERSON, person.get_name());

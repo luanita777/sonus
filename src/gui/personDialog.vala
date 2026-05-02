@@ -111,8 +111,10 @@ public class PersonDialog : Adw.Window {
         } catch(DAOError e){
             show_error("Error saving new person. " + e.message);          
         } catch(DomainError e){
-                show_error("Error with the new person data validation. " + e.message);
-        }            
+            show_error("Error with the new person data validation. " + e.message);
+        } catch(Error e){
+            show_error("An error ocurred. We are sorry. " + e.message);
+        }
         
     }
     

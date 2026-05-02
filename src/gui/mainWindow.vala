@@ -49,9 +49,6 @@ public class MainWindow : Adw.ApplicationWindow {
     private unowned Sonus.DAO.DAO dao;
 
     private unowned string path;
-
-    private Gee.ArrayList<Song> current_songs;
-
     
     public MainWindow (Gtk.Application app, Sonus.DAO.DAO _dao, string _path) {
         Object (application: app);

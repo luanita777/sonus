@@ -7,7 +7,7 @@ namespace Sonus.DAO {
     public partial class DAO {
         
         // GROUP WRITERS //        
-        public void insert_group(Group group) throws DAOError {
+        public void insert_group(Group group) throws Error {
             Performer performer;
             if(group.get_id() != -1)
                 performer = new Performer(group.get_id(), (int)PerformerType.GROUP, group.get_name());
