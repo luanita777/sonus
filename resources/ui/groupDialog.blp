@@ -1,0 +1,162 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $GroupDialog : Adw.Window {
+  title: "Create Group";
+  default-width: 500;
+  modal: true;
+  resizable: false;
+
+  content: Box {
+    orientation: vertical;
+    spacing: 18;
+    margin-top: 24;
+    margin-bottom: 24;
+    margin-start: 24;
+    margin-end: 24;
+
+    Box {
+      orientation: vertical;
+      spacing: 6;
+      Label {
+        label: "Group Name";
+        halign: start;
+        styles ["caption"]
+      }
+      Entry group_name_entry {
+        placeholder-text: "Ej: The Beatles";
+      }
+    }
+
+    Box {
+      spacing: 12;
+      
+      Box {
+        orientation: vertical;
+        spacing: 6;
+        hexpand: true;
+        Label {
+          label: "Start Date";
+          halign: start;
+          styles ["caption"]
+        }
+        MenuButton start_date_btn {
+          direction: down;
+          
+          child: Adw.ButtonContent start_date_content {
+            label: "mm / dd / yyyy";
+            icon-name: "x-office-calendar-symbolic";
+          };
+          
+          popover: Popover {
+            child: Box {
+              orientation: vertical;
+              margin-top: 12;
+              margin-bottom: 12;
+              margin-start: 12;
+              margin-end: 12;
+              spacing: 6;
+
+              Calendar start_date_calendar {}
+            };
+          };
+        }
+      }
+
+      Box {
+        orientation: vertical;
+        spacing: 6;
+        hexpand: true;
+        Label {
+          label: "End Date";
+          halign: start;
+          styles ["caption"]
+        }
+        MenuButton end_date_btn {
+          direction: down;
+          
+          child: Adw.ButtonContent end_date_content {
+            label: "mm / dd / yyyy";
+            icon-name: "x-office-calendar-symbolic";
+          };
+          
+          popover: Popover {
+            child: Box {
+              orientation: vertical;
+              margin-top: 12;
+              margin-bottom: 12;
+              margin-start: 12;
+              margin-end: 12;
+              spacing: 6;
+
+              Calendar end_date_calendar {}
+            };
+          };
+        }
+      }
+    }
+
+
+    Box {
+      orientation: vertical;
+      spacing: 6;
+
+      Box {
+        valign: center;
+        Label {
+          label: "Group Members";
+          hexpand: true;
+          halign: start;
+          styles ["caption"]
+        }
+
+        Button new_member_btn {
+          styles ["flat"]
+          child: Box {
+            spacing: 6;
+            Image {
+              icon-name: "contact-new-symbolic";
+            }
+            Label {
+              label: "New Person";
+            }
+          };
+        }
+      }
+
+      ScrolledWindow {
+        max-content-height: 160;
+        child: ListBox members_listbox {
+          selection-mode: none;
+          styles ["card"]
+        };
+      }
+    }
+
+
+    Box {
+      spacing: 12;
+      margin-top: 12;
+      homogeneous: true; 
+
+      Button cancel_btn {
+        label: "Cancel";
+      }
+
+      Button save_btn {
+        styles ["suggested-action"]
+        child: Box {
+          spacing: 8;
+          halign: center;
+          Image {
+            icon-name: "document-save-symbolic";
+          }
+          Label {
+            label: "<b>Create Group</b>";
+            use-markup: true;
+          }
+        };
+      }
+    }
+  };
+}

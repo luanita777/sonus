@@ -5,6 +5,10 @@ using Sonus.Db;
 
 namespace Sonus.DAO {
 
+    public errordomain DAOError {
+        FAILED
+    }
+
     public partial class DAO : Object {
 
         public unowned Database get_db() throws Error {

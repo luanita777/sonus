@@ -8,7 +8,24 @@ namespace Sonus.DAO {
         
         // GROUP WRITERS //        
         public void insert_group(Group group) throws Error {
-            var performer = new Performer(group.get_id(), (int)PerformerType.GROUP, group.get_name());
+            Performer performer;
+            if(group.get_id() != -1)
+                performer = new Performer(group.get_id(), (int)PerformerType.GROUP, group.get_name());
+            else {
+                var np = new Performer(-1, (int)PerformerType.GROUP, group.get_name());
+                insert_performer(np);
+
+                int? new_id = find_performer_by_exact_name(group.get_name());
+                if(new_id == null)
+                    throw new DAOError.FAILED("Couldn´t find performer ID.");
+
+                var found_performer = find_performer_by_id(new_id);
+                if(found_performer == null)
+                    throw new DAOError.FAILED("Couldn't get the created performer from DB");
+
+                performer = found_performer;
+                group.set_id(new_id);
+            }
             update_performer(performer);
 
             var sql = "INSERT INTO groups (id_group, name, start_date, end_date) VALUES (?, ?, ?, ?)";

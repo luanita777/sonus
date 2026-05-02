@@ -1,0 +1,114 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $MainWindow : Adw.ApplicationWindow {
+  default-width: 960;
+  default-height: 600;
+
+  content: Adw.ToolbarView {
+    [top]
+    Adw.HeaderBar {
+      title-widget: Adw.WindowTitle {
+        title: "Sonus";
+      };
+
+      [start]
+      Button mine_songs_btn{
+	child: Box{
+	  spacing: 8;
+	  halign: center;
+	  Image{
+	    icon-name: "emblem-system-symbolic";
+	  }
+	  Label {
+	    label: "Mine Songs";
+	  }
+	};
+      }
+
+      [start]
+      Button create_person_btn {
+	child: Box {
+	  spacing: 8;
+	  halign: center;
+	  Image{
+	    icon-name: "avatar-default-symbolic";
+	  }
+	  Label {
+	    label: "Create Person";
+	  }
+	};
+      }
+
+      [start]
+      Button create_group_btn {
+	child: Box {
+	  spacing: 8;
+	  halign: center;
+	  Image{
+	    icon-name: "system-users-symbolic";
+	  }
+	  Label {
+	    label: "Create Group";
+	  }
+	};
+      }
+
+
+      [end]
+      Box {
+        styles ["linked"]
+        Button list_btn { 
+          icon-name: "view-list-symbolic"; 
+        }	
+      }
+    }
+    
+    content: Box {
+      orientation: vertical;
+      spacing: 12;
+      margin-top: 12;
+      margin-start: 12;
+      margin-end: 12;
+
+      Box {
+        spacing: 6;
+        Button btn_song { label: "Song"; }
+        Button btn_artist { label: "Artist"; }
+        Button btn_genre { label: "Genre"; }
+        Button btn_album { label: "Album"; }
+        
+        Separator { styles ["spacer"] }
+
+        Box {
+          styles ["linked"]
+          Button btn_and         { label: "&&"; }
+          Button btn_or          { label: "||"; }
+          Button btn_not         { label: "-"; }
+          Button btn_parenthesis { label: "()"; }
+          Button btn_comma       { label: ", "; }
+        }
+      }
+
+      SearchEntry search_entry {
+        placeholder-text: "Ej: song: love, artist: (John && -Travolta)";
+      }
+
+      Stack main_stack {
+        transition-type: crossfade;
+        hexpand: true;
+        vexpand: true;
+
+	StackPage {
+	  name: "list";
+	  child: ScrolledWindow {
+	    child: ListBox list_box {
+              selection-mode: none;
+	    };
+	  };
+	}
+	
+      }
+    };
+  };
+}

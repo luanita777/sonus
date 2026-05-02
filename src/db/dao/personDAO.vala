@@ -2,13 +2,33 @@ using GLib;
 using Sqlite;
 using Gee;
 
+
 namespace Sonus.DAO{
 
     public partial class DAO {
 
          // PERSON WRITERS //        
-        public void insert_person(Person person) throws Error{
-            var performer = new Performer(person.get_id(), (int)PerformerType.PERSON, person.get_name());
+        public void insert_person(Person person) throws Error {
+            Performer performer;
+            if(person.get_id() != -1)
+                performer = new Performer(person.get_id(), (int)PerformerType.PERSON, person.get_name());
+            else{
+                var np = new Performer(-1, (int)PerformerType.PERSON, person.get_name());
+                insert_performer(np);
+
+                int? new_id = find_performer_by_exact_name(person.get_name());
+                if(new_id == null)
+                    throw new DAOError.FAILED("Couldn't find performer ID");
+
+                var found_performer = find_performer_by_id(new_id);
+                if(found_performer == null)
+                    throw new DAOError.FAILED("Couldn't get the created performer from DB");
+
+                performer = found_performer;
+                person.set_id(new_id);
+                
+            }
+                
             update_performer(performer);
             
             var sql = "INSERT INTO persons (id_person, stage_name, real_name, birth_date, death_date) VALUES (?, ?, ?, ?, ?)";

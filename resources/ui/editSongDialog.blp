@@ -1,0 +1,169 @@
+using Gtk 4.0;
+using Adw 1;
+
+template $EditSongDialog : Adw.Window {
+  title: "Edit Song";
+  default-width: 500;
+  modal: true;
+  resizable: false;
+
+  content: Adw.ToolbarView {
+    [top]
+    Adw.HeaderBar {
+      title-widget: Adw.WindowTitle {
+        title: "Edit Song";
+      };
+    }
+
+    content: Box {
+      orientation: vertical;
+      spacing: 16;
+      margin-top: 24;
+      margin-bottom: 24;
+      margin-start: 24;
+      margin-end: 24;
+
+      // Song Title
+      Box {
+        orientation: vertical;
+        spacing: 6;
+
+        Label {
+          label: "Song Title";
+          halign: start;
+        }
+
+        Entry title_entry {}
+      }
+
+      // Artist Dropdown and Actions
+      Box {
+        orientation: vertical;
+        spacing: 6;
+
+        Label {
+          label: "Artist";
+          halign: start;
+        }
+
+        DropDown performers_dropdown {
+          hexpand: true;
+        }
+
+        Box {
+          spacing: 6;
+          margin-top: 4;
+
+          Button create_person_btn {
+            child: Box {
+              spacing: 8;
+              halign: center;
+
+              Image {
+                icon-name: "avatar-default-symbolic";
+              }
+
+              Label {
+                label: "Create Person";
+              }
+            };
+          }
+
+          Button create_group_btn {
+            child: Box {
+              spacing: 8;
+              halign: center;
+
+              Image {
+                icon-name: "system-users-symbolic";
+              }
+
+              Label {
+                label: "Create Group";
+              }
+            };
+          }
+
+          Button edit_artist_btn {
+            child: Box {
+              spacing: 8;
+              halign: center;
+
+              Image {
+                icon-name: "document-edit-symbolic";
+              }
+
+              Label {
+                label: "Edit Artist";
+              }
+            };
+          }
+        }
+      }
+
+      // Genre and Album
+      Box {
+        spacing: 12;
+
+        Box {
+          orientation: vertical;
+          spacing: 6;
+          hexpand: true;
+
+          Label {
+            label: "Genre";
+            halign: start;
+          }
+
+          Entry genre_entry {}
+        }
+
+        Box {
+          orientation: vertical;
+          spacing: 6;
+          hexpand: true;
+
+          Label {
+            label: "Album (disabled temporarily)";
+            halign: start;
+          }
+
+          Entry album_entry {
+            sensitive: false;
+          }
+        }
+      }
+
+      // Actions
+      Box {
+        spacing: 12;
+        margin-top: 12;
+
+        Button cancel_btn {
+          label: "Cancel";
+          hexpand: true;
+        }
+
+        Button save_btn {
+          hexpand: true;
+          styles [
+            "suggested-action"
+          ]
+
+          child: Box {
+            spacing: 8;
+            halign: center;
+
+            Image {
+              icon-name: "document-save-symbolic";
+            }
+
+            Label {
+              label: "Save Changes";
+            }
+          };
+        }
+      }
+    };
+  };
+}
