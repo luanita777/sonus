@@ -40,11 +40,7 @@ int main(string[] args) {
 
     int status = app.run(args);
 
-    try {
-        db.close();
-    } catch (Error e) {
-        stderr.printf("Error closing database: %s\n", e.message);
-    }
+    db.close();
 
     return status;
 }
