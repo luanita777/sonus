@@ -133,7 +133,8 @@ test_main = files('tests/testMain.vala')
 
 vapi_args = [
     '--vapidir', join_paths(meson.current_source_dir(), 'vapi'),
-    '--gresourcesdir', join_paths(meson.current_build_dir(), 'resources', 'ui')
+    '--gresourcesdir', join_paths(meson.current_build_dir(), 'resources', 'ui'),
+    '--disable-warnings'
 ]
 
 # Make the executable
