@@ -4,6 +4,9 @@
     <file preprocess="xml-stripblanks">mainWindow.ui</file>
     <file preprocess="xml-stripblanks">personDialog.ui</file>
     <file preprocess="xml-stripblanks">groupDialog.ui</file>
+    <file preprocess="xml-stripblanks">editSongDialog.ui</file>
+    <file preprocess="xml-stripblanks">editPersonDialog.ui</file>
+    <file preprocess="xml-stripblanks">editGroupDialog.ui</file>
   </gresource>
 </gresources>
 

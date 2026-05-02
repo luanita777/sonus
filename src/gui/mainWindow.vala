@@ -225,7 +225,13 @@ public class MainWindow : Adw.ApplicationWindow {
                 list_btn.set_child(list_box_content);
             
                 list_btn.clicked.connect(() => {
-                        
+                        var dialog = new EditSongDialog(this, dao, song.get_id());
+                        dialog.set_transient_for(this);
+                        dialog.set_modal(true);
+                        dialog.song_saved.connect (() => {                                
+                                load_songs(dao);
+                            });
+                        dialog.present();
                     });
             
                 list_box_row.set_child(list_btn);

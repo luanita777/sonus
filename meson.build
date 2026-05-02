@@ -26,12 +26,18 @@ blueprints = custom_target('blueprints',
   input: files(
     'resources/ui/mainWindow.blp',   
     'resources/ui/personDialog.blp',
-    'resources/ui/groupDialog.blp'
+    'resources/ui/groupDialog.blp',
+    'resources/ui/editSongDialog.blp',
+    'resources/ui/editPersonDialog.blp',
+    'resources/ui/editGroupDialog.blp'	
   ),
   output: [
     'mainWindow.ui',
     'personDialog.ui',
-    'groupDialog.ui'
+    'groupDialog.ui',
+    'editSongDialog.ui',
+    'editPersonDialog.ui',
+    'editGroupDialog.ui'
   ],
   command: [blueprint_compiler, 'batch-compile', '@OUTDIR@', '@CURRENT_SOURCE_DIR@', '@INPUT@']
 )
@@ -82,9 +88,10 @@ miner_sources = files (
 gui_sources = files(
     'src/gui/mainWindow.vala',
     'src/gui/personDialog.vala',
-    'src/gui/groupDialog.vala'
-    #'src/gui/view/songs_list_view.vala',
-    #'src/gui/controller/songs_controller.vala'
+    'src/gui/groupDialog.vala',
+    'src/gui/editSongDialog.vala',
+    'src/gui/editPersonDialog.vala',
+    'src/gui/editGroupDialog.vala'
 )
 
 main_file = files('src/main.vala')
